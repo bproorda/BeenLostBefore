@@ -8,7 +8,7 @@ import * as Permissions from 'expo-permissions';
 export default function Compass() {
 
     const [magnetFound, setMagnetFound] = useState(false);
-    const [data, setData] = React.useState({
+    const [data, setData] = useState({
         x: 0,
         y: 0,
         z: 0,
@@ -19,17 +19,26 @@ export default function Compass() {
 
  // To run on initial render of page   
     useEffect(() => {
-
         alertIfRemoteNotificationsDisabledAsync()
         initalSet();
     }, []);
 
-    Magnetometer.addListener(result => {
-        setData({ data: result });
+ function getNumbers(){
+       Magnetometer.setUpdateInterval(2000);
+      Magnetometer.addListener(result => {
+        setData(result);
         //console.log(result);
-        console.log(data);
+        //console.log(data);
+        //return Magnetometer.removeAllListeners()
       });
-   Magnetometer.setUpdateInterval(10000);
+}
+
+ useEffect(()=> {
+   getNumbers();
+ });
+ useEffect(()=>{
+     console.log(data);
+ }, [data]);
 
     async function initalSet() {
         let result = await Magnetometer.isAvailableAsync();
@@ -52,7 +61,9 @@ export default function Compass() {
         <>
             <Text>underConstruction</Text>
             <Text>{magnetFound ? "Compass Detected!" : "No Compass Detected!"}</Text>
-            <Text>X: {data.x} Y: {data.y} Z: {data.z}</Text>
+            <Text>X: {data.x ? data.x : 0}
+             Y: {data.y ? data.y : 0} 
+             Z: {data.z ? data.z : 0}</Text>
         </>
     )
 
