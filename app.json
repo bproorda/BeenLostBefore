@@ -1,0 +1,12 @@
+{
+  "name": "BeenLostBefore",
+  "displayName": "BeenLostBefore",
+  "expo": {
+    "name": "BeenLostBefore",
+    "slug": "BeenLostBefore",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
