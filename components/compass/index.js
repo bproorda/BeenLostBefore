@@ -55,15 +55,22 @@ export default function Compass() {
         }
     }
 
+    function round(n) {
+        if (!n) {
+          return 0;
+        }
+      
+        return Math.floor(n * 100) / 100;
+      }
    
 
     return (
         <>
             <Text>underConstruction</Text>
             <Text>{magnetFound ? "Compass Detected!" : "No Compass Detected!"}</Text>
-            <Text>X: {data.x ? data.x : 0}
-             Y: {data.y ? data.y : 0} 
-             Z: {data.z ? data.z : 0}</Text>
+            <Text>X: {round(data.x)}
+             Y: {round(data.y)} 
+             Z: {round(data.z)}</Text>
         </>
     )
 
