@@ -22,14 +22,14 @@ export default function Compass() {
 
         alertIfRemoteNotificationsDisabledAsync()
         initalSet();
-         Magnetometer.addListener(result => {
-             setData({ data: result });
-             //console.log(result);
-             console.log(data);
-           });
-        Magnetometer.setUpdateInterval(2000);
-
     }, []);
+
+    Magnetometer.addListener(result => {
+        setData({ data: result });
+        //console.log(result);
+        console.log(data);
+      });
+   Magnetometer.setUpdateInterval(10000);
 
     async function initalSet() {
         let result = await Magnetometer.isAvailableAsync();
@@ -46,6 +46,7 @@ export default function Compass() {
         }
     }
 
+   
 
     return (
         <>
