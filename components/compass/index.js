@@ -50,7 +50,7 @@ useEffect(getNumbers,[]);
     //   } else {
     //     angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
     //   }
-     angle = (Math.atan2(y,x)*(180 / Math.PI) -90)*-1;
+     angle = (Math.atan2(y,x)*(180 / Math.PI) -25);
     if(angle < 0){
       angle = angle + 360;
     }
