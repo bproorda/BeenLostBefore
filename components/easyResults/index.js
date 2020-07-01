@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
-import compass from './compass2.png'
 import { RotationGestureHandler } from 'react-native-gesture-handler';
 import { color } from 'react-native-reanimated';
 
-export default function HardResults(props) {
+export default function EasyResults(props) {
     let x = props.x;
     let y = props.y;
     let z = props.z;
     const [bearing, setBearing] = useState(0);
+    const [temp, setTemp] = useState('Hot');
 
     useEffect(() => {
         CalcBearing();
@@ -17,7 +17,7 @@ export default function HardResults(props) {
     function CalcBearing() {
         let angle = (Math.atan2(y, x) * (180 / Math.PI) - 25);
         if (angle < 0) {
-            angle = angle + 360;
+            angle = angle * -1;
         }
         setBearing(angle);
         console.log(round(bearing));
@@ -26,7 +26,7 @@ export default function HardResults(props) {
     useEffect(() => {
         CalcBearing();
     }, [props]);
-    
+
     function round(n) {
         if (!n) {
             return 0;
@@ -35,27 +35,25 @@ export default function HardResults(props) {
         return Math.floor(n * 100) / 100;
     }
 
-    function imageStyle() {
-        let style = {
-            width: 200,
-            height: 200,
-            backgroundColor: 'blue',
-            transform: [{ rotate: `${bearing}deg` }],
-        };
-        return style;
+function changeStyle(){
+    let style = {
+            width: 300,
+            height: 300,
+            borderRadius: '50%',
+    }
+    if(bearing <=180 && bearing > 90){
+        setTemp('Cold');
+        style.backgroundColor = "darkblue";
+    } else (bearing >= 0 && bearing <= 90){
+        setTemp('Hot');
+        style.backgroundColor = "red";
     }
 
+    return style;
+}
+
+
     return (
-        <>
-
-            <Image source={compass} style={imageStyle()} />
-            <Text>Data By Direction</Text>
-            <Text>X: {round(x)}
-             Y: {round(y)}
-             Z: {round(z)}</Text>
-            <Text>Bearing:{round(bearing)}{'\u00b0'}</Text>
-        </>
+    <View style={changeStyle()}>{temp}</View>
     )
-
-
 }
