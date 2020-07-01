@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import { Magnetometer, Accelerometer, Gyroscope } from 'expo-sensors';
 import * as Permissions from 'expo-permissions';
-import HardResults from '../hardResults'
+import HardResults from '../hardResults';
+import EasyResults from '../easyResults';
 
 
 
@@ -55,7 +56,8 @@ useEffect(getNumbers, []);
    
     return(
         <>
-        <HardResults x={data.x} y={data.y} z = {data.z} />
+        {/* <HardResults x={data.x} y={data.y} z = {data.z} /> */}
+        <EasyResults x={data.x} y={data.y} z = {data.z} />
         </>
     )
 
