@@ -33,22 +33,29 @@ export default function Compass() {
         //return Magnetometer.removeAllListeners()
       });
 }
+useEffect(getNumbers,[]);
 
- useEffect(()=> {
-   getNumbers();
- });
+//  useEffect(()=> {
+//    getNumbers();
+//  });
+
+
  useEffect(()=>{
      let angle = 0;
      let {x, y} = data;
 
-     //math.atan2 finds radians between y axis and vector(x, y)
-     if (Math.atan2(x, y) >= 0) {
-        angle = Math.atan2(x, y) * (180 / Math.PI);
-      } else {
-        angle = (Math.atan2(x, y) + 2 * Math.PI) * (180 / Math.PI);
-      }
+     //math.atan2 finds radians between x axis and vector(y, x)
+    //  if (Math.atan2(y, x) >= 0) {
+    //     angle = Math.atan2(y, x) * (180 / Math.PI);
+    //   } else {
+    //     angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
+    //   }
+     angle = (Math.atan2(y,x)*(180 / Math.PI) -90)*-1;
+    if(angle < 0){
+      angle = angle + 360;
+    }
       setBearing(angle);
-     //console.log(bearing);
+     console.log(round(bearing));
  }, [data]);
 
     async function initalSet() {
