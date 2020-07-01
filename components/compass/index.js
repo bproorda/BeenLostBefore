@@ -13,6 +13,7 @@ export default function Compass() {
         y: 0,
         z: 0,
     });
+    const [bearing, setBearing] = useState(0);
 
   
 
@@ -37,7 +38,17 @@ export default function Compass() {
    getNumbers();
  });
  useEffect(()=>{
-     console.log(data);
+     let angle = 0;
+     let {x, y} = data;
+
+     //math.atan2 finds radians between y axis and vector(x, y)
+     if (Math.atan2(x, y) >= 0) {
+        angle = Math.atan2(x, y) * (180 / Math.PI);
+      } else {
+        angle = (Math.atan2(x, y) + 2 * Math.PI) * (180 / Math.PI);
+      }
+      setBearing(angle);
+     //console.log(bearing);
  }, [data]);
 
     async function initalSet() {
@@ -71,6 +82,7 @@ export default function Compass() {
             <Text>X: {round(data.x)}
              Y: {round(data.y)} 
              Z: {round(data.z)}</Text>
+    <Text>Bearing: {round(bearing)}</Text>
         </>
     )
 
