@@ -26,9 +26,9 @@ export default function Compass() {
         initalSet();
     }, []);
 
- function getNumbers(){
+  function getNumbers(){
        Magnetometer.setUpdateInterval(2000);
-      Magnetometer.addListener(result => {
+     let sub = Magnetometer.addListener(result => {
         setData(result);
         //console.log(result);
         console.log(data);

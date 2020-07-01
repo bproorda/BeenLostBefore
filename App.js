@@ -12,14 +12,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>I've Been Lost Before and this is what it looks like</Text>
-      <Text>{value}</Text>
       <Compass />
-      <TextInput
-      style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-      onChangeText={text => onChangeText(text)}
-      value={value}
-    />
       <StatusBar style="auto" />
     </View>
   );
