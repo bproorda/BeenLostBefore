@@ -31,10 +31,11 @@ export default function Compass() {
         setData(result);
         //console.log(result);
         console.log(data);
-        // Magnetometer.removeAllListeners()
       });
+      return ()=>{Magnetometer.removeAllListeners()};
 }
-useEffect(getNumbers,[]);
+
+useEffect(getNumbers, []);
 
     async function initalSet() {
         let result = await Magnetometer.isAvailableAsync();

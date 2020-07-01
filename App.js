@@ -14,7 +14,6 @@ export default function App() {
     <View style={styles.container}>
       <Text>I've Been Lost Before and this is what it looks like</Text>
       <Text>{value}</Text>
-      <Image source={compass} style={{width: 200, height: 200}}/>
       <Compass />
       <TextInput
       style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}

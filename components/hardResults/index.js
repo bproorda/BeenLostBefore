@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import compass from './compass2.png'
+import { RotationGestureHandler } from 'react-native-gesture-handler';
+import { color } from 'react-native-reanimated';
 
 export default function HardResults(props){
     let x = props.x;
@@ -8,14 +11,21 @@ export default function HardResults(props){
     const [bearing, setBearing] = useState(0);
 
     useEffect(()=>{
-        let angle = (Math.atan2(y,x)*(180 / Math.PI) -25);
-        if(angle < 0){
-          angle = angle + 360;
-        }
-          setBearing(angle);
-         console.log(round(bearing));
+        CalcBearing();
     }, []);
 
+function CalcBearing(){
+    let angle = (Math.atan2(y,x)*(180 / Math.PI) -25);
+    if(angle < 0){
+      angle = angle + 360;
+    }
+      setBearing(angle);
+     console.log(round(bearing));
+};
+
+  useEffect(()=>{
+    CalcBearing();
+  }, [props])
     function round(n) {
         if (!n) {
           return 0;
@@ -24,11 +34,20 @@ export default function HardResults(props){
         return Math.floor(n * 100) / 100;
       }
    
+      function imageStyle(){
+         let style = {
+             width: 200,
+             height: 200,
+             backgroundColor: 'blue',
+             transform: [{ rotate: `${bearing}deg` }],
+         };
+         return style;
+      }
 
     return (
         <>
             
-            {/* <Text>{magnetFound ? "Compass Detected!" : "No Compass Detected!"}</Text> */}
+            <Image source={compass} style={imageStyle()}/>
             <Text>Data By Direction</Text>
             <Text>X: {round(x)}
              Y: {round(y)} 
