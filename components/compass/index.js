@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
 import { Magnetometer, Accelerometer, Gyroscope } from 'expo-sensors';
 import * as Permissions from 'expo-permissions';
 import HardResults from '../hardResults';
@@ -7,7 +7,7 @@ import EasyResults from '../easyResults';
 
 
 
-export default function Compass() {
+export default function Compass(props) {
 
     const [magnetFound, setMagnetFound] = useState(false);
     const [data, setData] = useState({
@@ -17,7 +17,7 @@ export default function Compass() {
     });
     const [bearing, setBearing] = useState(0);
 
-  
+  let toggle = props.toggle;
 
 
  // To run on initial render of page   
@@ -56,8 +56,7 @@ useEffect(getNumbers, []);
    
     return(
         <>
-        {/* <HardResults x={data.x} y={data.y} z = {data.z} /> */}
-        <EasyResults x={data.x} y={data.y} z = {data.z} />
+        { toggle ?<EasyResults x={data.x} y={data.y} z = {data.z} /> : <HardResults x={data.x} y={data.y} z = {data.z} /> }
         </>
     )
 
